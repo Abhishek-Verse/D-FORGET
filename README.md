@@ -6,6 +6,36 @@ AI Task Organizer helps users turn scattered information into clear actions. Ins
 
 This project combines a Kotlin + Jetpack Compose Android client with a FastAPI backend that performs AI analysis, PDF extraction, and source processing.
 
+## Download the APK
+
+You can download the latest release APK directly from the GitHub Releases page for this repository.
+
+- Release page: GitHub Releases
+- APK file: `app-release.apk`
+
+The release build is intended for local testing and sharing, and it connects to the backend URL you configure on your device or self-hosted server.
+
+> The app does not store the AI provider key inside the APK. Users should run their own backend and place their own API key in the backend environment.
+
+---
+
+## Using your own API key
+
+For real AI responses, configure the backend with your own provider key instead of relying on a hardcoded value in the app.
+
+1. Create or update `backend/.env`
+2. Set your key, for example:
+
+```env
+AI_API_KEY="your_own_api_key_here"
+AI_MODEL="gpt-4o"
+```
+
+3. Start the backend locally or on your own server
+4. In the Android app, set the backend URL to match your server
+
+This keeps the app portable: anyone can download the APK and connect it to their own self-hosted backend instance.
+
 ---
 
 ## Why this project

@@ -32,7 +32,8 @@ local.properties
 *.aab
 *.jks
 *.keystore
-key.properties
+android/key.properties
+android/release-key.jks
 
 # IDE and editor
 .idea/
