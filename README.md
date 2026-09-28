@@ -6,35 +6,38 @@ AI Task Organizer helps users turn scattered information into clear actions. Ins
 
 This project combines a Kotlin + Jetpack Compose Android client with a FastAPI backend that performs AI analysis, PDF extraction, and source processing.
 
-## Download the APK
+## Project status: local use
 
-You can download the latest release APK directly from the GitHub Releases page for this repository.
+This is a personal project for local development and testing. It is not production-ready and does not include a hosted backend or a public AI service. Run the backend on your computer and connect the Android app to it.
 
-- Release page: GitHub Releases
-- APK file: `app-release.apk`
+### Quick local run (Windows PowerShell)
 
-The release build is intended for local testing and sharing, and it connects to the backend URL you configure on your device or self-hosted server.
+1. Start the backend setup from the repository root:
 
-> The app does not store the AI provider key inside the APK. Users should run their own backend and place their own API key in the backend environment.
+```powershell
+cd backend
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+Copy-Item .env.example .env
+```
 
----
-
-## Using your own API key
-
-For real AI responses, configure the backend with your own provider key instead of relying on a hardcoded value in the app.
-
-1. Create or update `backend/.env`
-2. Set your key, for example:
+2. Add your AI provider key to `backend/.env`:
 
 ```env
 AI_API_KEY="your_own_api_key_here"
 AI_MODEL="gpt-4o"
 ```
 
-3. Start the backend locally or on your own server
-4. In the Android app, set the backend URL to match your server
+3. Start the backend from the `backend` directory:
 
-This keeps the app portable: anyone can download the APK and connect it to their own self-hosted backend instance.
+```powershell
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+4. In Android Studio, open the `android` folder and run the app on an emulator. The default backend URL is `http://10.0.2.2:8000`. For a physical phone on the same Wi-Fi, set the backend URL in the app's Settings to your computer's LAN IP, such as `http://192.168.1.10:8000`.
+
+The API key stays in your local backend environment; it is not included in the Android app. See [Local installation](#local-installation) for the full setup steps.
 
 ---
 
@@ -278,13 +281,13 @@ android/app/build/outputs/apk/debug/app-debug.apk
 
 ### 4. Connect the app to the backend
 
-The app is configured to use the Android emulator loopback address:
+The app defaults to the Android emulator address:
 
 ```text
-http://10.0.2.2:8000/api/v1/
+http://10.0.2.2:8000
 ```
 
-This works when running in the Android emulator. For a physical device, replace it with your machine's LAN IP, for example:
+This works when running in the Android emulator. For a physical device, change the backend URL in the app's Settings to your machine's LAN IP, for example:
 
 ```text
 http://192.168.1.10:8000/api/v1/

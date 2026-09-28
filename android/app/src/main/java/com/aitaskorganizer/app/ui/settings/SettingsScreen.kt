@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aitaskorganizer.app.di.NetworkModule
 import com.aitaskorganizer.app.ui.components.BrutalBox
 import com.aitaskorganizer.app.ui.theme.*
 
@@ -27,9 +28,13 @@ import com.aitaskorganizer.app.ui.theme.*
  */
 @Composable
 fun SettingsScreen() {
-    var backendUrl by rememberSaveable { mutableStateOf("http://10.0.2.2:8000") }
+    var backendUrl by rememberSaveable { mutableStateOf(NetworkModule.getBackendUrl()) }
     var notificationsEnabled by rememberSaveable { mutableStateOf(true) }
     var darkModeEnabled by rememberSaveable { mutableStateOf(false) }
+
+    LaunchedEffect(backendUrl) {
+        NetworkModule.setBackendUrl(backendUrl)
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background
