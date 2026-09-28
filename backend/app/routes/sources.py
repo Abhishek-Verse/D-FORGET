@@ -1,7 +1,7 @@
 import os
 import shutil
 import uuid
-from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
@@ -22,7 +22,7 @@ UPLOAD_DIR = "uploads"
 def create_source(
     type: str,
     file: Optional[UploadFile] = File(None),
-    text: Optional[str] = None,
+    text: Optional[str] = Form(None),
     db: Session = Depends(get_db)
 ):
     filename = None

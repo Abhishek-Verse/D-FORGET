@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Undo
 import androidx.compose.material.icons.outlined.CheckCircle
-import androidx.compose.material.icons.outlined.Undo
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -170,7 +170,7 @@ private fun CompletedTaskCard(
             }
             IconButton(onClick = onUndo) {
                 Icon(
-                    imageVector = Icons.Outlined.Undo,
+                    imageVector = Icons.AutoMirrored.Outlined.Undo,
                     contentDescription = "Mark as pending",
                     tint = BauhausBlack
                 )

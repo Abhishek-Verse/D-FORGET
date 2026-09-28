@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.database import models
 from app.database.connection import get_db
 from app.schemas import ai as schemas
-from app.services.ai_service import AIService
+from app.services.ai_service import AIConfigurationError, AIProviderError, AIService
 
 router = APIRouter(
     prefix="/analyze",
@@ -23,7 +23,12 @@ async def analyze_source(source_id: int, db: Session = Depends(get_db)):
         )
 
     # Trigger AI Analysis
-    result = await AIService.analyze_text(db_source.original_text, source_id)
+    try:
+        result = await AIService.analyze_text(db_source.original_text, source_id)
+    except AIConfigurationError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except AIProviderError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
 
     # Optionally update the source with a summary
     db_source.summary = result.summary

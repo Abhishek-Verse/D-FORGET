@@ -158,10 +158,10 @@ fun TasksScreen(
                 selectedIndex = selectedTabIndex,
                 onTabSelected = { selectedTabIndex = it },
                 taskCounts = mapOf(
-                    TaskTab.ALL to MockData.pendingTasks.size,
-                    TaskTab.TODAY to MockData.todayTasks.size,
-                    TaskTab.UPCOMING to MockData.upcomingTasks.size,
-                    TaskTab.OVERDUE to MockData.overdueTasks.size
+                    TaskTab.ALL to allPending.size,
+                    TaskTab.TODAY to todayTasksState.size,
+                    TaskTab.UPCOMING to upcomingTasksState.size,
+                    TaskTab.OVERDUE to overdueTasksState.size
                 )
             )
 

@@ -25,6 +25,7 @@ if settings.ALLOWED_ORIGINS:
 
 app.include_router(tasks.router, prefix=settings.API_V1_STR)
 app.include_router(sources.router, prefix=settings.API_V1_STR)
+app.include_router(analysis.router, prefix=settings.API_V1_STR)
 
 @app.get("/health", tags=["health"])
 def health_check():
